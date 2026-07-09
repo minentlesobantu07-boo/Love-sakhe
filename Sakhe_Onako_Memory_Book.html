@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakhe ❤️ Onako</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;scroll-behavior:smooth}
+body{background:linear-gradient(135deg,#5b21b6,#9333ea);color:#fff}
+#passwordScreen{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:linear-gradient(135deg,#4c1d95,#9333ea);z-index:9999}
+.login-box{background:#fff;color:#222;padding:35px;border-radius:20px;width:320px;text-align:center}
+.login-box input,.vault input{width:100%;padding:12px;border-radius:10px;border:1px solid #ccc;margin:10px 0}
+button,.btn{padding:12px 22px;border:none;border-radius:30px;background:#7e22ce;color:#fff;cursor:pointer}
+#mainContent{display:none}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px}
+.cover-photo img{width:220px;height:220px;border-radius:50%;object-fit:cover;border:5px solid white}
+section{padding:70px 10%}
+.card{background:rgba(255,255,255,.12);backdrop-filter:blur(8px);padding:25px;border-radius:20px}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.gallery-grid img{width:100%;height:250px;object-fit:cover;border-radius:15px;cursor:pointer;transition:.3s}
+.gallery-grid img:hover{transform:scale(1.03)}
+.music-player,.vault,.notes{text-align:center}
+#lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);justify-content:center;align-items:center;z-index:10000}
+#lightbox img{max-width:90%;max-height:90%;border-radius:15px}
+.dark-mode{background:#111}
+footer{text-align:center;padding:30px}
+</style>
+</head>
+<body>
+
+<div id="passwordScreen">
+<div class="login-box">
+<h2>💜 Sakhe & Onako</h2>
+<p>Enter Password</p>
+<input type="password" id="sitePassword">
+<button onclick="enterSite()">Enter</button>
+<p id="loginError"></p>
+</div>
+</div>
+
+<div id="mainContent">
+
+<section class="hero">
+<div class="cover-photo">
+<img src="images/cover.jpg" alt="Cover Photo">
+</div>
+<h1 style="margin-top:20px">Sakhe ❤️ Onako</h1>
+<p>Together, even when miles apart.</p>
+
+<div class="music-player card" style="margin-top:25px">
+<h3>🎵 Our Song</h3>
+<audio controls>
+<source src="music/oursong.mp3" type="audio/mpeg">
+</audio>
+</div>
+
+<button style="margin-top:20px" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+</section>
+
+<section>
+<div class="card">
+<h2>💜 Our Story</h2>
+<p>Add your own story here and describe how your journey began.</p>
+</div>
+</section>
+
+<section>
+<h2 style="text-align:center;margin-bottom:20px">📸 Memory Gallery</h2>
+<div class="gallery-grid">
+<img src="images/photo1.jpg" onclick="openLightbox(this.src)">
+<img src="images/photo2.jpg" onclick="openLightbox(this.src)">
+<img src="images/photo3.jpg" onclick="openLightbox(this.src)">
+<img src="images/photo4.jpg" onclick="openLightbox(this.src)">
+<img src="images/photo5.jpg" onclick="openLightbox(this.src)">
+<img src="images/photo6.jpg" onclick="openLightbox(this.src)">
+</div>
+</section>
+
+<section class="notes">
+<div class="card">
+<h2>💌 Love Notes</h2>
+<p id="loveNote">Click below for a surprise message.</p>
+<button onclick="showLoveNote()">Show Love Note</button>
+</div>
+</section>
+
+<section class="vault">
+<div class="card">
+<h2>🔒 Secret Message</h2>
+<input type="password" id="secretPassword" placeholder="Enter secret password">
+<button onclick="unlockSecret()">Unlock</button>
+<p id="secretMessage"></p>
+</div>
+</section>
+
+<footer>Made with 💜 for Sakhe & Onako</footer>
+
+</div>
+
+<div id="lightbox" onclick="closeLightbox()">
+<img id="lightboxImage">
+</div>
+
+<script>
+function enterSite(){
+ if(document.getElementById('sitePassword').value==='love_july2023'){
+   document.getElementById('passwordScreen').style.display='none';
+   document.getElementById('mainContent').style.display='block';
+ } else {
+   document.getElementById('loginError').innerText='Incorrect password';
+ }
+}
+
+const notes=[
+'You are my favorite person 💜',
+'Distance means nothing when love means everything ❤️',
+'Every day with you is a gift ✨',
+'Our story is my favorite story 💕',
+'You make life beautiful 🌹'
+];
+
+function showLoveNote(){
+ document.getElementById('loveNote').innerText=notes[Math.floor(Math.random()*notes.length)];
+}
+
+function unlockSecret(){
+ const p=document.getElementById('secretPassword').value;
+ document.getElementById('secretMessage').innerText =
+ p==='love_july2023' ? '💜 No distance can break what we have built together.' : 'Incorrect password';
+}
+
+function openLightbox(src){
+ document.getElementById('lightboxImage').src=src;
+ document.getElementById('lightbox').style.display='flex';
+}
+function closeLightbox(){
+ document.getElementById('lightbox').style.display='none';
+}
+function toggleDarkMode(){
+ document.body.classList.toggle('dark-mode');
+}
+</script>
+</body>
+</html>
